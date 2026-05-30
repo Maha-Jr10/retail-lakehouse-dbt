@@ -50,3 +50,9 @@ env/
 # OS
 Thumbs.db
 .DS_Store
+
+# uv / Python tooling
+.python-version
+uv.lock
+pyproject.toml
+main.py
