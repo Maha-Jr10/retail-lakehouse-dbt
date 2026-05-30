@@ -1,0 +1,16 @@
+category_id,category_name,department,is_taxable,is_perishable
+CAT001,Fresh Produce,Grocery,false,true
+CAT002,Dairy & Eggs,Grocery,false,true
+CAT003,Meat & Seafood,Grocery,false,true
+CAT004,Frozen Foods,Grocery,false,true
+CAT005,Bakery,Grocery,false,true
+CAT006,Beverages,Grocery,true,false
+CAT007,Snacks & Candy,Grocery,true,false
+CAT008,Household Supplies,Home,true,false
+CAT009,Personal Care,Health & Beauty,true,false
+CAT010,Electronics,Technology,true,false
+CAT011,Clothing & Apparel,Fashion,true,false
+CAT012,Toys & Games,Entertainment,true,false
+CAT013,Sports & Outdoors,Fitness,true,false
+CAT014,Office Supplies,Business,true,false
+CAT015,Baby & Toddler,Family,false,false

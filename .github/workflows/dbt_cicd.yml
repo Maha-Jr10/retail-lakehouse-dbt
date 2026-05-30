@@ -1,0 +1,85 @@
+name: dbt CI/CD
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  dbt-ci:
+    name: dbt build (dev) — PR check
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dbt-databricks
+        run: pip install dbt-databricks==1.10.9
+
+      - name: Install dbt packages
+        working-directory: maha_dbt
+        run: dbt deps
+
+      - name: dbt build — dev
+        working-directory: maha_dbt
+        run: dbt build --target dev
+        env:
+          DBT_TOKEN: ${{ secrets.DBT_TOKEN }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
+
+  dbt-prod:
+    name: dbt build (prod) — deploy on merge
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dbt-databricks
+        run: pip install dbt-databricks==1.10.9
+
+      - name: Install dbt packages
+        working-directory: maha_dbt
+        run: dbt deps
+
+      - name: dbt build — prod
+        working-directory: maha_dbt
+        run: dbt build --target prod
+        env:
+          DBT_TOKEN: ${{ secrets.DBT_TOKEN }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
+          DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}
+
+      - name: dbt snapshot — prod
+        working-directory: maha_dbt
+        run: dbt snapshot --target prod
+        env:
+          DBT_TOKEN: ${{ secrets.DBT_TOKEN }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
+          DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}
+
+      - name: Generate dbt docs
+        working-directory: maha_dbt
+        run: dbt docs generate --target prod
+        env:
+          DBT_TOKEN: ${{ secrets.DBT_TOKEN }}
+          DBT_HOST: ${{ secrets.DBT_HOST }}
+          DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
+          DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}

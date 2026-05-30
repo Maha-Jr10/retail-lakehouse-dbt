@@ -1,0 +1,13 @@
+reason_code,reason_description,category,is_refund_eligible
+RET001,Defective or damaged product,Quality,true
+RET002,Wrong item received,Fulfillment Error,true
+RET003,Item not as described,Mismatch,true
+RET004,Changed mind,Customer Choice,false
+RET005,Found better price elsewhere,Customer Choice,false
+RET006,Duplicate order,Fulfillment Error,true
+RET007,Item arrived too late,Shipping,false
+RET008,Missing parts or accessories,Quality,true
+RET009,Allergic reaction or health concern,Health,true
+RET010,Gift recipient did not want item,Customer Choice,false
+RET011,Incorrect size or fit,Mismatch,true
+RET012,Product expired or near expiry,Quality,true

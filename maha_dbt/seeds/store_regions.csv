@@ -1,0 +1,11 @@
+region_id,region_name,country,timezone,is_active
+REG001,Northeast,USA,America/New_York,true
+REG002,Southeast,USA,America/New_York,true
+REG003,Midwest,USA,America/Chicago,true
+REG004,Southwest,USA,America/Denver,true
+REG005,West Coast,USA,America/Los_Angeles,true
+REG006,Pacific Northwest,USA,America/Los_Angeles,true
+REG007,Ontario,Canada,America/Toronto,true
+REG008,Quebec,Canada,America/Montreal,true
+REG009,British Columbia,Canada,America/Vancouver,true
+REG010,Northern,USA,America/Chicago,false

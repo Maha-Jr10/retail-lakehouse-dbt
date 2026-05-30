@@ -1,0 +1,45 @@
+version: 2
+
+exposures:
+
+  - name: sales_executive_dashboard
+    type: dashboard
+    maturity: high
+    description: Executive dashboard showing daily revenue trends, MoM growth, and top-line KPIs
+    depends_on:
+      - ref('gold_sales_by_day')
+      - ref('gold_sales_by_store')
+      - ref('gold_sales_by_product')
+    owner:
+      name: Muhammed John
+      email: muhammedjohn3@gmail.com
+
+  - name: store_performance_report
+    type: dashboard
+    maturity: high
+    description: Regional store performance — revenue ranking, discount rates, revenue per customer
+    depends_on:
+      - ref('gold_sales_by_store')
+    owner:
+      name: Muhammed John
+      email: muhammedjohn3@gmail.com
+
+  - name: customer_insights_report
+    type: analysis
+    maturity: medium
+    description: Customer lifetime value, RFM segmentation, and loyalty tier breakdown
+    depends_on:
+      - ref('gold_customer_summary')
+    owner:
+      name: Muhammed John
+      email: muhammedjohn3@gmail.com
+
+  - name: product_performance_report
+    type: analysis
+    maturity: medium
+    description: Product revenue contribution, top sellers, and category-level discount analysis
+    depends_on:
+      - ref('gold_sales_by_product')
+    owner:
+      name: Muhammed John
+      email: muhammedjohn3@gmail.com

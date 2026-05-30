@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: silver_sales
+    description: Wide table joining all bronze dimensions onto the sales fact — one row per sale
+    config:
+      materialized: incremental
+      schema: silver
+    columns:
+      - name: sales_id
+        description: Primary key
+        tests:
+          - unique
+          - not_null
+      - name: sale_surrogate_key
+        description: MD5 surrogate key from sales_id, customer_sk, product_sk
+        tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        tests:
+          - not_null
+      - name: product_sk
+        tests:
+          - not_null
+      - name: store_sk
+        tests:
+          - not_null
+      - name: date_sk
+        tests:
+          - not_null
+      - name: net_amount
+        description: Final sale total after discount
+        tests:
+          - not_null

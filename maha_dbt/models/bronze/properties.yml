@@ -1,0 +1,120 @@
+version: 2
+
+models:
+  - name: bronze_sales
+    description: Raw fact sales data loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: sales_id
+        description: Primary key for a sale
+        tests:
+          - unique
+          - not_null
+      - name: customer_sk
+        description: Foreign key to bronze_customer
+        tests:
+          - not_null
+          - relationships:
+              to: ref('bronze_customer')
+              field: customer_sk
+      - name: product_sk
+        description: Foreign key to bronze_product
+        tests:
+          - not_null
+          - relationships:
+              to: ref('bronze_product')
+              field: product_sk
+      - name: store_sk
+        description: Foreign key to bronze_store
+        tests:
+          - not_null
+          - relationships:
+              to: ref('bronze_store')
+              field: store_sk
+      - name: date_sk
+        description: Foreign key to bronze_date
+        tests:
+          - not_null
+          - relationships:
+              to: ref('bronze_date')
+              field: date_sk
+
+  - name: bronze_returns
+    description: Raw fact returns data loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: sales_id
+        description: Foreign key linking return back to original sale
+        tests:
+          - not_null
+          - relationships:
+              to: ref('bronze_sales')
+              field: sales_id
+      - name: product_sk
+        description: Foreign key to bronze_product
+        tests:
+          - not_null
+      - name: store_sk
+        description: Foreign key to bronze_store
+        tests:
+          - not_null
+      - name: date_sk
+        description: Foreign key to bronze_date
+        tests:
+          - not_null
+      - name: returned_qty
+        description: Quantity of items returned
+        tests:
+          - not_null
+
+  - name: bronze_customer
+    description: Raw customer dimension loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: customer_sk
+        description: Primary key for a customer
+        tests:
+          - unique
+          - not_null
+
+  - name: bronze_product
+    description: Raw product dimension loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: product_sk
+        description: Primary key for a product
+        tests:
+          - unique
+          - not_null
+
+  - name: bronze_store
+    description: Raw store dimension loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: store_sk
+        description: Primary key for a store
+        tests:
+          - unique
+          - not_null
+
+  - name: bronze_date
+    description: Raw date dimension loaded from source
+    config:
+      materialized: view
+      schema: bronze
+    columns:
+      - name: date_sk
+        description: Primary key for a date
+        tests:
+          - unique
+          - not_null

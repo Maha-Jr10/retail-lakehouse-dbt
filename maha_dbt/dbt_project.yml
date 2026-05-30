@@ -1,0 +1,68 @@
+name: 'maha_dbt'
+version: '1.0.0'
+profile: 'maha_dbt'
+
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+vars:
+  start_date: '2024-01-01'
+  end_date: '2099-12-31'
+  is_prod: "{{ target.name == 'prod' }}"
+
+on-run-start:
+  - "{{ log('Starting dbt run | env: ' ~ target.name ~ ' | catalog: ' ~ target.catalog, info=True) }}"
+
+on-run-end:
+  - "{{ log('dbt run complete | env: ' ~ target.name, info=True) }}"
+
+seeds:
+  maha_dbt:
+    +schema: seeds
+    +tags: ['seeds']
+    date_dimension:
+      +column_types:
+        date_id: integer
+        year: integer
+        quarter: integer
+        month: integer
+        day: integer
+        day_of_week: integer
+        is_weekend: boolean
+    product_categories:
+      +column_types:
+        is_taxable: boolean
+        is_perishable: boolean
+    store_regions:
+      +column_types:
+        is_active: boolean
+    return_reasons:
+      +column_types:
+        is_refund_eligible: boolean
+
+models:
+  maha_dbt:
+    bronze:
+      +materialized: view
+      +tags: ['bronze']
+    silver:
+      +materialized: incremental
+      +tags: ['silver']
+      +post-hook: "{{ grant_select() }}"
+    gold:
+      +materialized: table
+      +tags: ['gold']
+      +post-hook: "{{ grant_select() }}"
+
+snapshots:
+  maha_dbt:
+    +target_schema: snapshots
+    +tags: ['snapshots']
