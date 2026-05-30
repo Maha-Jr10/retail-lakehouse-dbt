@@ -12,10 +12,6 @@ snapshot-paths: ["snapshots"]
 clean-targets:
   - "target"
   - "dbt_packages"
-
-flags:
-  use_materialization_v2: true
-
 vars:
   start_date: '2024-01-01'
   end_date: '2099-12-31'
