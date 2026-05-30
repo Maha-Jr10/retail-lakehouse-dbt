@@ -65,6 +65,7 @@ jobs:
           DBT_HOST: ${{ secrets.DBT_HOST }}
           DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
           DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}
+          DBT_GRANTS_ROLE: ${{ secrets.DBT_GRANTS_ROLE }}
 
       - name: dbt snapshot — prod
         working-directory: maha_dbt
@@ -74,6 +75,7 @@ jobs:
           DBT_HOST: ${{ secrets.DBT_HOST }}
           DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
           DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}
+          DBT_GRANTS_ROLE: ${{ secrets.DBT_GRANTS_ROLE }}
 
       - name: Generate dbt docs
         working-directory: maha_dbt
@@ -83,3 +85,4 @@ jobs:
           DBT_HOST: ${{ secrets.DBT_HOST }}
           DBT_HTTP_PATH: ${{ secrets.DBT_HTTP_PATH }}
           DBT_PROD_CATALOG: ${{ secrets.DBT_PROD_CATALOG }}
+          DBT_GRANTS_ROLE: ${{ secrets.DBT_GRANTS_ROLE }}
