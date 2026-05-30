@@ -2,6 +2,8 @@
 
 Production-grade retail data pipeline using dbt + Databricks | Medallion architecture (Bronze → Silver → Gold) | SCD Type 2 | CI/CD | 49 data tests
 
+![Retail Analytics Lakehouse — Medallion Architecture](maha_dbt/retail_lakehouse_dbt.png)
+
 ---
 
 ## What's Inside

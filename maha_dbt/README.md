@@ -6,34 +6,7 @@ A production-grade dbt project implementing a **Bronze → Silver → Gold** med
 
 ## Architecture Overview
 
-```
-Raw Source (Databricks)
-        │
-        ▼
-┌─────────────┐
-│   BRONZE    │  Views — raw data as-is from source
-│             │  bronze_sales, bronze_returns, bronze_customer,
-│             │  bronze_product, bronze_store, bronze_date
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│   SILVER    │  Incremental table — cleaned, joined wide table
-│             │  silver_sales (one row per sale, all dims joined)
-└──────┬──────┘
-       │
-       ▼
-┌─────────────┐
-│    GOLD     │  Tables — aggregated, business-ready metrics
-│             │  gold_sales_by_day, gold_sales_by_product,
-│             │  gold_sales_by_store, gold_customer_summary
-└─────────────┘
-       │
-       ▼
-┌─────────────┐
-│  SNAPSHOTS  │  SCD Type 2 history — customer, product, store
-└─────────────┘
-```
+![Retail Analytics Lakehouse — Medallion Architecture](retail_lakehouse_dbt.png)
 
 ---
 
