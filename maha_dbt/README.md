@@ -139,8 +139,9 @@ Create a `.env` file in the `maha_dbt/` directory:
 DBT_TOKEN=dapi...                          # Databricks personal access token
 DBT_HOST=dbc-xxxx.cloud.databricks.com    # Databricks workspace host
 DBT_HTTP_PATH=/sql/1.0/warehouses/xxxx    # SQL warehouse HTTP path
-DBT_PROD_CATALOG=dbt_tuto_prod            # Unity Catalog name for production
-# DBT_GRANTS_ROLE=analysts                # Uncomment when principal exists in Databricks
+DBT_SOURCE_CATALOG=dbt_tuto_dev           # Unity Catalog containing raw source tables
+DBT_PROD_CATALOG=dbt_tuto_prod            # Unity Catalog name for production models
+DBT_GRANTS_ROLE=analysts                  # Databricks group to grant SELECT on silver/gold (optional)
 ```
 
 Load env vars in PowerShell before running dbt:
@@ -290,7 +291,9 @@ Go to **Settings → Secrets and variables → Actions** and add:
 | `DBT_TOKEN` | Databricks personal access token |
 | `DBT_HOST` | Databricks workspace host (e.g. `dbc-xxxx.cloud.databricks.com`) |
 | `DBT_HTTP_PATH` | SQL warehouse HTTP path |
+| `DBT_SOURCE_CATALOG` | Unity Catalog containing the raw source tables |
 | `DBT_PROD_CATALOG` | Production Unity Catalog name |
+| `DBT_GRANTS_ROLE` | Databricks group to grant SELECT on silver/gold tables (optional) |
 
 ---
 

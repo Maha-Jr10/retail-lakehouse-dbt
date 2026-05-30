@@ -1,6 +1,6 @@
 sources:
   - name: source
-    database: dbt_tuto_dev 
+    database: "{{ env_var('DBT_SOURCE_CATALOG', 'dbt_tuto_dev') }}"
     schema: source
     tables:
       - name: dim_product
