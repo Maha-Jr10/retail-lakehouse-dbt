@@ -11,6 +11,8 @@ Production-grade retail data pipeline using dbt + Databricks | Medallion archite
 ```
 dbt_tuto/
 ├── maha_dbt/        # Main dbt project — retail analytics pipeline
+├── BI_Dashboards/   # Power BI report file, connection config, and dashboard screenshots
+├── screenshots/     # Project screenshots — lineage graphs, CI/CD, Databricks SQL
 ├── tables/          # Source CSV data (dim & fact tables)
 └── README.md        # This file
 ```
@@ -88,6 +90,40 @@ dbt snapshot                     # SCD Type 2 history capture
 dbt docs generate && dbt docs serve --port 8083   # Documentation
 dbt build --target prod          # Deploy to production
 ```
+
+---
+
+## BI Dashboards
+
+The [`BI_Dashboards/`](BI_Dashboards/) folder contains ready-to-use Power BI assets built on top of the gold layer:
+
+| File | Description |
+|---|---|
+| `bi.pbix` | Power BI report with 4 dashboard pages (Sales Overview, Store Performance, Product Performance, Customer Insights) |
+| `databricks-Serverless Starter Warehouse.pbids` | Power BI connection file — opens a DirectQuery session against the Databricks SQL warehouse |
+| `Sales Overview.png` | Dashboard screenshot — monthly revenue trend and KPIs |
+| `Store Performance.png` | Dashboard screenshot — store and regional ranking |
+| `Product Performance.png` | Dashboard screenshot — top products and category breakdown |
+| `Customer Insights.png` | Dashboard screenshot — loyalty tiers, LTV, and RFM segmentation |
+
+To connect with the `.pbids` file: open it in Power BI Desktop, authenticate with your Databricks credentials, then select the gold tables (`gold_sales_by_day`, `gold_sales_by_store`, `gold_sales_by_product`, `gold_customer_summary`).
+
+---
+
+## Screenshots
+
+The [`screenshots/`](screenshots/) folder documents the project in production:
+
+| File | Shows |
+|---|---|
+| `maha_dbt_lineage_graph.png` | Full dbt DAG — end-to-end model lineage |
+| `sales_executive_dashboard_lineage_graph.png` | Lineage to the Sales Executive Dashboard exposure |
+| `product_performance_report_lineage_graph.png` | Lineage to the Product Performance Report exposure |
+| `exposure_docs_localhost.png` | dbt docs exposures page |
+| `databricks_catalog.png` | Unity Catalog — gold tables in Databricks |
+| `databricks_sql_query.png` | Ad-hoc SQL on gold tables in Databricks SQL Editor |
+| `dbt_quering.png` | dbt analysis query execution |
+| `github_action.png` | CI/CD pipeline run in GitHub Actions |
 
 ---
 

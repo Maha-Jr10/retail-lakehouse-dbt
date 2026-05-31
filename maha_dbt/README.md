@@ -283,6 +283,21 @@ Four downstream consumers documented in [`models/exposures.yml`](models/exposure
 
 ---
 
+## BI Dashboards (Power BI)
+
+A Power BI report (`../BI_Dashboards/bi.pbix`) connects to all four gold tables via DirectQuery and implements the four exposures above as dashboard pages:
+
+| Page | Key visuals |
+|---|---|
+| Sales Overview | Monthly revenue trend, orders over time, revenue by month |
+| Store Performance | Top stores by revenue, regional breakdown, revenue per customer |
+| Product Performance | Top products, category revenue, units vs revenue scatter |
+| Customer Insights | LTV by loyalty tier, customers by gender, avg order value, top customers |
+
+Use `../BI_Dashboards/databricks-Serverless Starter Warehouse.pbids` to open a fresh DirectQuery connection to the Databricks SQL warehouse without the full `.pbix` file.
+
+---
+
 ## Owner
 
 **Muhammed John** — muhammedjohn3@gmail.com
